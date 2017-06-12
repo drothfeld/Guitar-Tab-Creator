@@ -1,0 +1,260 @@
+/* line 5, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../../../../../../usr/local/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/*------------------------
+-- Title */
+/* line 3, ../sass/_main.scss */
+.page_title {
+  text-align: center;
+  font-size: 30px;
+  font-family: "Courier New", serif;
+  color: black;
+  font-weight: bold;
+}
+/* line 9, ../sass/_main.scss */
+.page_title .song_menu_buttons {
+  text-align: center;
+  font-family: "Helevtica", sans-serif;
+}
+/* line 13, ../sass/_main.scss */
+.page_title .welcome_message {
+  font-size: 15px;
+  text-align: center;
+  color: #000000;
+}
+/* line 18, ../sass/_main.scss */
+.page_title .page_subtitle {
+  text-align: center;
+  font-size: 15px;
+}
+
+/* line 23, ../sass/_main.scss */
+.index_main_background {
+  border: 1px solid black;
+}
+
+/* line 26, ../sass/_main.scss */
+.tab_main_background {
+  border: 1px solid black;
+  background-repeat: space;
+}
+
+/*------------------------
+-- Login */
+/* line 32, ../sass/_main.scss */
+.login_message {
+  text-align: center;
+}
+
+/* line 35, ../sass/_main.scss */
+.login_buttons {
+  text-align: center;
+}
+
+/* line 38, ../sass/_main.scss */
+.logout_button {
+  text-align: center;
+}
+
+/*------------------------
+-- Menu Buttons */
+/* line 43, ../sass/_main.scss */
+.song_cancel_button {
+  text-align: right;
+}
+
+/* line 46, ../sass/_main.scss */
+.back_button {
+  text-align: center;
+}
+
+/*------------------------
+-- Note Buttons */
+/* line 51, ../sass/_main.scss */
+.note_buttons_e_border {
+  float: left;
+  text-align: left;
+}
+
+/* line 55, ../sass/_main.scss */
+.note_buttons_e {
+  float: left;
+  text-align: left;
+  display: inline-block;
+}
+
+/* line 60, ../sass/_main.scss */
+.note_buttons_eZERO {
+  float: right;
+}
+
+/* line 63, ../sass/_main.scss */
+.note_buttons_b {
+  float: left;
+  text-align: left;
+}
+
+/* line 67, ../sass/_main.scss */
+.note_buttons_g {
+  float: left;
+  text-align: left;
+}
+
+/* line 71, ../sass/_main.scss */
+.note_buttons_d {
+  float: left;
+  text-align: left;
+}
+
+/* line 75, ../sass/_main.scss */
+.note_buttons_a {
+  float: left;
+  text-align: left;
+}
+
+/* line 79, ../sass/_main.scss */
+.note_buttons_E {
+  float: left;
+  text-align: left;
+}
+
+/*------------------------
+-- Tab Notes */
+/* line 85, ../sass/_main.scss */
+.tab_notes {
+  font-family: "Courier New", Times, san-serif;
+}
+
+/* line 88, ../sass/_main.scss */
+.tab_tools {
+  font-family: "Courier New", Times, san-serif;
+  border: 1px solid black;
+}
+/* line 91, ../sass/_main.scss */
+.tab_tools .tab_tools_title {
+  font-weight: bold;
+}
+
+/*------------------------
+-- Song Listing */
+/* line 97, ../sass/_main.scss */
+.view_songs {
+  float: left;
+  padding-bottom: 30px;
+}
+
+/* line 101, ../sass/_main.scss */
+.song_background {
+  background-image: url(URL("/applications/CMPS183_PROJECT/static/images/GTC_Song_Background.jpg"));
+  height: 180px;
+  width: 125px;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.7) 0 4px 10px 2px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.7) 0 4px 10px 2px;
+  box-shadow: rgba(0, 0, 0, 0.7) 0 4px 10px 2px;
+  text-align: center;
+  display: inline-block;
+}
+/* line 112, ../sass/_main.scss */
+.song_background .song_title {
+  text-align: center;
+  font-size: 1.6em;
+  color: #010bff;
+  -webkit-text-stroke: 1px black;
+}
+/* line 119, ../sass/_main.scss */
+.song_background .trash_icon {
+  color: #bb1111;
+  text-align: center;
+}
+
+/*------------------------
+-- Comments */
+/* line 126, ../sass/_main.scss */
+.comment_form {
+  float: left;
+}
+
+/* line 129, ../sass/_main.scss */
+.comments {
+  text-align: left;
+  white-space: pre-line;
+}
+
+/* line 133, ../sass/_main.scss */
+.comments_title {
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Courier New", serif;
+}
+
+/*------------------------
+-- Other */
+/* line 140, ../sass/_main.scss */
+.colorful {
+  color: #bb8833;
+}

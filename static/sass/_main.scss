@@ -1,0 +1,142 @@
+/*------------------------
+-- Title */
+.page_title {
+  text-align: center;
+  font-size: 30px;
+  font-family: "Courier New", serif;
+  color: black;
+  font-weight: bold;
+  .song_menu_buttons {
+    text-align: center;
+    font-family: "Helevtica", sans-serif;
+  }
+  .welcome_message {
+    font-size: 15px;
+    text-align: center;
+    color: #000000;
+  }
+  .page_subtitle {
+    text-align: center;
+    font-size: 15px;
+  }
+}
+.index_main_background {
+  border: 1px solid black;
+}
+.tab_main_background {
+  border: 1px solid black;
+  background-repeat: space;
+}
+/*------------------------
+-- Login */
+.login_message {
+  text-align: center;
+}
+.login_buttons {
+  text-align: center;
+}
+.logout_button {
+  text-align: center;
+}
+/*------------------------
+-- Menu Buttons */
+.song_cancel_button {
+  text-align: right;
+}
+.back_button {
+  text-align: center;
+}
+/*------------------------
+-- Note Buttons */
+.note_buttons_e_border {
+  float:left;
+  text-align:left;
+}
+.note_buttons_e {
+  float:left;
+  text-align:left;
+  display:inline-block;
+}
+.note_buttons_eZERO {
+  float:right;
+}
+.note_buttons_b {
+  float:left;
+  text-align:left;
+}
+.note_buttons_g {
+  float:left;
+  text-align:left;
+}
+.note_buttons_d {
+  float:left;
+  text-align:left;
+}
+.note_buttons_a {
+  float:left;
+  text-align:left;
+}
+.note_buttons_E {
+  float:left;
+  text-align:left;
+}
+/*------------------------
+-- Tab Notes */
+.tab_notes {
+  font-family: "Courier New", Times, san-serif;
+}
+.tab_tools {
+  font-family: "Courier New", Times, san-serif;
+  border: 1px solid black;
+  .tab_tools_title {
+    font-weight: bold;
+  }
+}
+/*------------------------
+-- Song Listing */
+.view_songs {
+  float: left;
+  padding-bottom: 30px;
+}
+.song_background {
+  background-image: url(URL('/applications/CMPS183_PROJECT/static/images/GTC_Song_Background.jpg'));
+  height: 180px;
+  width: 125px;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 10px;
+  @include box-shadow(rgba(#000,0.7) 0 4px 10px 2px);
+  text-align: center;
+  display: inline-block;
+
+  .song_title {
+    text-align: center;
+    font-size: 1.6em;
+    color: #010bff;
+    -webkit-text-stroke: 1px black;
+  }
+
+  .trash_icon {
+    color: #bb1111;
+    text-align: center;
+  }
+}
+/*------------------------
+-- Comments */
+.comment_form {
+  float: left;
+}
+.comments {
+  text-align: left;
+  white-space: pre-line;
+}
+.comments_title {
+  font-weight: bold;
+  font-size: 25px;
+  font-family: "Courier New", serif;
+}
+/*------------------------
+-- Other */
+.colorful {
+  color: $clrHilight;
+}

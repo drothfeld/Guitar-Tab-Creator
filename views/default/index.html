@@ -1,0 +1,589 @@
+{{extend 'layout.html'}}
+
+<!-- GTC INDEX PAGE -->
+<!------------------------------------------------------------------------------------------------------>
+<!-- Page Title -->
+{{background_index_image = URL('static','images/GTC_View_Songs_Title_Background.jpg')}}
+<div class="index_main_background" style="background-image: url('{{=background_index_image}}')">
+<p style="margin-bottom:50px;"></p>
+<div class=page_title>
+    Guitar Tab Creator
+</div>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Not Logged-In Display -->
+<p style="margin-bottom:10px;"></p>
+{{if auth.user_id is None:}}
+        <p style="margin-bottom:10px;"></p>
+        <div class=login_message>
+            You must be signed in to save a song.
+        </div>
+        <hr>
+        <p style="margin-bottom:10px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Login/Sign Up Buttons -->
+        <div id="main_login">
+            <div class=login_buttons>
+                {{=A('Sign Up', _class='btn btn-warning btn-lg', _href=URL('default', 'user', args=['register']))}}
+                {{=A('Login', _class='btn btn-success btn-lg', _href=URL('default', 'user', args=['login']))}}
+                <br><br>
+            </div>
+        </div>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Logged-In Display -->
+{{else:}}
+        <div class=page_title>
+            <div class=welcome_message>
+                Welcome, {{=auth.user.first_name}} {{=auth.user.last_name}}
+                <p style="margin-bottom:5px;"></p>
+                {{=A('Logout', _class='btn btn-danger btn-xs', _href=URL('default', 'user', args=['logout']))}}
+            </div>
+        <p style="margin-bottom:10px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Logged-In Buttons -->
+        <p style="margin-bottom:10px;"></p>
+        <div class=song_menu_buttons>
+            <a class='btn btn-success btn-lg' id="btn_song_add">Save Song</a>
+            {{=A('Song Library', _class='btn btn-primary btn-lg', _href=URL('default', 'view_songs'))}}
+            <a class='btn btn-danger btn-lg' id="btn_reset_tab">Reset Tab</a>
+        </div>
+        <br><br>
+        <div class=song_cancel_button>
+            <a class="btn btn-danger" id="btn_song_cancel" style="display: none">Cancel</a>
+        </div>
+        <p style="margin-bottom:2px;"></p>
+        <div id=song_form style="display: none">
+            {{=song_form}}
+        </div>
+        </div>
+{{pass}}
+</div>
+<p style="margin-bottom:25px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Guitar Note Buttons -->
+{{background_image = URL('static','images/GTC_Background.jpg')}}
+<div class="Index-Background" style="background-image: url('{{=background_image}}')" >
+<div id=notes>
+{{for e in note_list_e:}}
+    <div class=note_buttons_e_border>
+        -------------------------
+    </div>
+{{pass}}
+<br>
+{{for e in note_list_e:}}
+    <div class=note_buttons_e>
+        <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_{{=e}}" type="button" value={{=e}}>
+        -------------------------
+    </div>
+{{pass}}
+<div class="note_buttons_eZERO">
+    <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_e00" type="button" value=e00>
+    -------------------------
+</div>
+<br><br><br>
+{{for b in note_list_b:}}
+    <div class=note_buttons_b>
+        <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_{{=b}}" type="button" value={{=b}}>
+        -------------------------
+    </div>
+{{pass}}
+<div class="note_buttons_eZERO">
+    <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_b00" type="button" value=b00>
+    -------------------------
+</div>
+<br><br><br>
+{{for g in note_list_g:}}
+    <div class=note_buttons_g>
+        <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_{{=g}}" type="button" value={{=g}}>
+        -------------------------
+    </div>
+{{pass}}
+<div class="note_buttons_eZERO">
+    <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_g00" type="button" value=g00>
+    -------------------------
+</div>
+<br><br><br>
+{{for d in note_list_d:}}
+    <div class=note_buttons_d>
+        <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_{{=d}}" type="button" value={{=d}}>
+        -------------------------
+    </div>
+{{pass}}
+<div class="note_buttons_eZERO">
+    <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_d00" type="button" value=d00>
+    -------------------------
+</div>
+<br><br><br>
+{{for a in note_list_a:}}
+    <div class=note_buttons_a>
+        <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_{{=a}}" type="button" value={{=a}}>
+        -------------------------
+    </div>
+{{pass}}
+<div class="note_buttons_eZERO">
+    <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_a00" type="button" value=a00>
+    -------------------------
+</div>
+<br><br><br>
+{{for E in note_list_E:}}
+    <div class=note_buttons_E>
+        <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_{{=E}}" type="button" value={{=E}}>
+        -------------------------
+    </div>
+{{pass}}
+<div class="note_buttons_eZERO">
+    <input class="btn btn-warning btn-xs btn-block" style="color: black" id="btn_note_E00" type="button" value=E00>
+    -------------------------
+</div>
+<br><br>
+</div></div>
+<p style="margin-bottom:25px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Display Live Tab -->
+<div class="tab_tools" style="background-image: url('{{=background_index_image}}')">
+    <br>
+    <span class="tab_tools_title">•TOOLS:</span>
+    <a class='btn btn-default btn-sm' style="color: black" id="btn_vertical_line">Vertical Line</a>|
+    <a class='btn btn-default btn-sm' style="color: black" id="btn_repeat_sign">Repeat Sign</a>|
+    <a class='btn btn-default btn-sm' style="color: black" id="btn_blank_space">Blank Space</a>|
+    <a class='btn btn-default btn-sm' style="color: black" id="btn_undo_last">Undo</a>|
+    <br><br>
+    <span class="tab_tools_title">•CHORDS:</span>
+    <a class='btn btn-default btn-sm' id="btn_chord_A">A</a>|
+    <a class='btn btn-default btn-sm' id="btn_chord_B">B</a>|
+    <a class='btn btn-default btn-sm' id="btn_chord_C">C</a>|
+    <a class='btn btn-default btn-sm' id="btn_chord_D">D</a>|
+    <a class='btn btn-default btn-sm' id="btn_chord_E">E</a>|
+    <a class='btn btn-default btn-sm' id="btn_chord_F">F</a>|
+    <a class='btn btn-default btn-sm' id="btn_chord_G">G</a>|
+    <br><br>
+</div>
+<hr>
+<span class="tab_tools_title">TAB:</span>
+<div class ="tab_notes">
+    <br>
+    e|-<var id="song_notes_e">{{notes_e = ''}}</var>
+    <br>
+    B|-<var id="song_notes_b">{{notes_b = ''}}</var>
+    <br>
+    G|-<var id="song_notes_g">{{notes_g = ''}}</var>
+    <br>
+    D|-<var id="song_notes_d">{{notes_d = ''}}</var>
+    <br>
+    A|-<var id="song_notes_a">{{notes_a = ''}}</var>
+    <br>
+    E|-<var id="song_notes_E">{{notes_E = ''}}</var>
+</div>
+<p style="margin-bottom:100px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Note Audio Sources -->
+<audio id="e00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e00.m4a"> </source> </audio>
+<audio id="e01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e01.m4a"> </source> </audio>
+<audio id="e02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e02.m4a"> </source> </audio>
+<audio id="e03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e03.m4a"> </source> </audio>
+<audio id="e04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e04.m4a"> </source> </audio>
+<audio id="e05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e05.m4a"> </source> </audio>
+<audio id="e06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e06.m4a"> </source> </audio>
+
+<audio id="b00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b00.m4a"> </source> </audio>
+<audio id="b01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b01.m4a"> </source> </audio>
+<audio id="b02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b02.m4a"> </source> </audio>
+<audio id="b03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b03.m4a"> </source> </audio>
+<audio id="b04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b04.m4a"> </source> </audio>
+<audio id="b05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b05.m4a"> </source> </audio>
+<audio id="b06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b06.m4a"> </source> </audio>
+
+<audio id="g00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g00.m4a"> </source> </audio>
+<audio id="g01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g01.m4a"> </source> </audio>
+<audio id="g02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g02.m4a"> </source> </audio>
+<audio id="g03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g03.m4a"> </source> </audio>
+<audio id="g04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g04.m4a"> </source> </audio>
+<audio id="g05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g05.m4a"> </source> </audio>
+<audio id="g06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g06.m4a"> </source> </audio>
+
+<audio id="d00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d00.m4a"> </source> </audio>
+<audio id="d01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d01.m4a"> </source> </audio>
+<audio id="d02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d02.m4a"> </source> </audio>
+<audio id="d03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d03.m4a"> </source> </audio>
+<audio id="d04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d04.m4a"> </source> </audio>
+<audio id="d05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d05.m4a"> </source> </audio>
+<audio id="d06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d06.m4a"> </source> </audio>
+
+<audio id="a00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a00.m4a"> </source> </audio>
+<audio id="a01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a01.m4a"> </source> </audio>
+<audio id="a02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a02.m4a"> </source> </audio>
+<audio id="a03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a03.m4a"> </source> </audio>
+<audio id="a04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a04.m4a"> </source> </audio>
+<audio id="a05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a05.m4a"> </source> </audio>
+<audio id="a06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a06.m4a"> </source> </audio>
+
+<audio id="E00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E00.m4a"> </source> </audio>
+<audio id="E01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E01.m4a"> </source> </audio>
+<audio id="E02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E02.m4a"> </source> </audio>
+<audio id="E03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E03.m4a"> </source> </audio>
+<audio id="E04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E04.m4a"> </source> </audio>
+<audio id="E05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E05.m4a"> </source> </audio>
+<audio id="E06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E06.m4a"> </source> </audio>
+
+<audio id="CA"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_a.m4a"> </source> </audio>
+<audio id="CB"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_b.m4a"> </source> </audio>
+<audio id="CC"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_c.m4a"> </source> </audio>
+<audio id="CD"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_d.m4a"> </source> </audio>
+<audio id="CE"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_e.m4a"> </source> </audio>
+<audio id="CF"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_f.m4a"> </source> </audio>
+<audio id="CG"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_g.m4a"> </source> </audio>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Javascript -->
+<script>
+    var old_e=[], old_b=[], old_g=[], old_d=[], old_a=[], old_E=[];
+    var note_count = 0;
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// Menu Buttons
+    $("#btn_song_add").click(function(e) {
+        $("#song_form").show(500, function() {
+            $("#btn_song_add").hide();
+        });
+        $("#btn_song_cancel").show();
+    });
+    $("#btn_song_cancel").click(function(e) {
+        $("#song_form").hide(500, function() {
+            $("#btn_song_add").show();
+        });
+        $("#btn_song_cancel").hide();
+    });
+    $("#btn_reset_tab").click(function(e) {
+        document.getElementById('song_notes_e').innerHTML = '';
+        document.getElementById('song_notes_b').innerHTML = '';
+        document.getElementById('song_notes_g').innerHTML = '';
+        document.getElementById('song_notes_d').innerHTML = '';
+        document.getElementById('song_notes_a').innerHTML = '';
+        document.getElementById('song_notes_E').innerHTML = '';
+    });
+    $(function() {
+        $("div#song_form input[type=submit]").on("click", function(e) {
+            //e.preventDefault();
+            console.log('--sending note data to server--');
+            var data_song_notes_e = document.getElementById('song_notes_e').innerHTML;
+            var data_song_notes_b = document.getElementById('song_notes_b').innerHTML;
+            var data_song_notes_g = document.getElementById('song_notes_g').innerHTML;
+            var data_song_notes_d = document.getElementById('song_notes_d').innerHTML;
+            var data_song_notes_a = document.getElementById('song_notes_a').innerHTML;
+            var data_song_notes_E = document.getElementById('song_notes_E').innerHTML;
+            send_notes(data_song_notes_e, data_song_notes_b, data_song_notes_g, data_song_notes_d, data_song_notes_a, data_song_notes_E);
+        });
+    });
+    function send_notes(e, b, g, d, a, E) {
+            jQuery.ajax(
+                '{{=URL('note_list_insert', user_signature=True)}}', {
+                    type          : "POST",
+                    static_id     : 'STATIC',
+                    data          : {e_notes : e, b_notes : b, g_notes : g, d_notes : d, a_notes : a, E_notes: E}
+                }
+        );
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// Toolbar Buttons
+    $("#btn_undo_last").click(function(e) {
+        if(note_count > 0) {
+            note_count--;
+            document.getElementById('song_notes_e').innerHTML = old_e[note_count];
+            document.getElementById('song_notes_b').innerHTML = old_b[note_count];
+            document.getElementById('song_notes_g').innerHTML = old_g[note_count];
+            document.getElementById('song_notes_d').innerHTML = old_d[note_count];
+            document.getElementById('song_notes_a').innerHTML = old_a[note_count];
+            document.getElementById('song_notes_E').innerHTML = old_E[note_count];
+        }
+    });
+    function save_current_values() {
+        old_e[note_count] = document.getElementById('song_notes_e').innerHTML;
+        old_b[note_count] = document.getElementById('song_notes_b').innerHTML;
+        old_g[note_count] = document.getElementById('song_notes_g').innerHTML;
+        old_d[note_count] = document.getElementById('song_notes_d').innerHTML;
+        old_a[note_count] = document.getElementById('song_notes_a').innerHTML;
+        old_E[note_count] = document.getElementById('song_notes_E').innerHTML;
+    }
+    function write_tab(e, b, g, d, a, E) {
+        note_count++;
+        document.getElementById('song_notes_e').innerHTML += e;
+        document.getElementById('song_notes_b').innerHTML += b;
+        document.getElementById('song_notes_g').innerHTML += g;
+        document.getElementById('song_notes_d').innerHTML += d;
+        document.getElementById('song_notes_a').innerHTML += a;
+        document.getElementById('song_notes_E').innerHTML += E;
+    }
+    function play_note(note) {
+        note = document.getElementById(note);
+        note.play();
+    }
+    $("#btn_vertical_line").click(function(e) {
+        save_current_values();
+        write_tab('|','|','|','|','|','|');
+    });
+    $("#btn_repeat_sign").click(function(e) {
+        save_current_values();
+        write_tab('--||','-•||','--||','--||','-•||','--||');
+    });
+    $("#btn_blank_space").click(function(e) {
+        save_current_values();
+        write_tab('---','---','---','---','---','---');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// Chord Buttons
+    $("#btn_chord_A").click(function(e) {
+        save_current_values();
+        write_tab('---','-2-','-2-','-2-','---','---');
+        play_note('CA');
+    });
+    $("#btn_chord_B").click(function(e) {
+        save_current_values();
+        write_tab('-2-','-4-','-4-','-4-','-2-','---');
+        play_note('CB');
+    });
+    $("#btn_chord_C").click(function(e) {
+        save_current_values();
+        write_tab('---','-1-','-0-','-2-','-3-','---');
+        play_note('CC');
+    });
+    $("#btn_chord_D").click(function(e) {
+        save_current_values();
+        write_tab('---','-2-','-3-','-2-','---','---');
+        play_note('CD');
+    });
+    $("#btn_chord_E").click(function(e) {
+        save_current_values();
+        write_tab('-0-','-0-','-1-','-2-','-2-','---');
+        play_note('CE');
+    });
+    $("#btn_chord_F").click(function(e) {
+        save_current_values();
+        write_tab('-1-','-1-','-2-','-3-','-3-','---');
+        play_note('CF');
+    });
+    $("#btn_chord_G").click(function(e) {
+        save_current_values();
+        write_tab('-3-','-3-','-0-','-0-','-2-','-3-');
+        play_note('CG');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// String Buttons: high e
+    $("#btn_note_e00").click(function(e) {
+        save_current_values();
+        write_tab('-0','--','--','--','--','--');
+        play_note('e00');
+    });
+    $("#btn_note_e01").click(function(e) {
+        save_current_values();
+        write_tab('-1','--','--','--','--','--');
+        play_note('e01');
+    });
+    $("#btn_note_e02").click(function(e) {
+        save_current_values();
+        write_tab('-2','--','--','--','--','--');
+        play_note('e02');
+    });
+    $("#btn_note_e03").click(function(e) {
+        save_current_values();
+        write_tab('-3','--','--','--','--','--');
+        play_note('e03');
+    });
+    $("#btn_note_e04").click(function(e) {
+        save_current_values();
+        write_tab('-4','--','--','--','--','--');
+        play_note('e04');
+    });
+    $("#btn_note_e05").click(function(e) {
+        save_current_values();
+        write_tab('-5','--','--','--','--','--');
+        play_note('e05');
+    });
+    $("#btn_note_e06").click(function(e) {
+        save_current_values();
+        write_tab('-6','--','--','--','--','--');
+        play_note('e06');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// String Buttons: b
+    $("#btn_note_b00").click(function(e) {
+        save_current_values();
+        write_tab('--','-0','--','--','--','--');
+        play_note('b00');
+    });
+    $("#btn_note_b01").click(function(e) {
+        save_current_values();
+        write_tab('--','-1','--','--','--','--');
+        play_note('b01');
+    });
+    $("#btn_note_b02").click(function(e) {
+        save_current_values();
+        write_tab('--','-2','--','--','--','--');
+        play_note('b02');
+    });
+    $("#btn_note_b03").click(function(e) {
+        save_current_values();
+        write_tab('--','-3','--','--','--','--');
+        play_note('b03');
+    });
+    $("#btn_note_b04").click(function(e) {
+        save_current_values();
+        write_tab('--','-4','--','--','--','--');
+        play_note('b04');
+    });
+    $("#btn_note_b05").click(function(e) {
+        save_current_values();
+        write_tab('--','-5','--','--','--','--');
+        play_note('b05');
+    });
+    $("#btn_note_b06").click(function(e) {
+        save_current_values();
+        write_tab('--','-6','--','--','--','--');
+        play_note('b06');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// String Buttons: g
+    $("#btn_note_g00").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-0','--','--','--');
+        play_note('g00');
+    });
+    $("#btn_note_g01").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-1','--','--','--');
+        play_note('g01');
+    });
+    $("#btn_note_g02").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-2','--','--','--');
+        play_note('g02');
+    });
+    $("#btn_note_g03").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-3','--','--','--');
+        play_note('g03');
+    });
+    $("#btn_note_g04").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-4','--','--','--');
+        play_note('g04');
+    });
+    $("#btn_note_g05").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-5','--','--','--');
+        play_note('g05');
+    });
+    $("#btn_note_g06").click(function(e) {
+        save_current_values();
+        write_tab('--','--','-6','--','--','--');
+        play_note('g06');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// String Buttons: d
+    $("#btn_note_d00").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-0','--','--');
+        play_note('d00');
+    });
+    $("#btn_note_d01").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-1','--','--');
+        play_note('d01');
+    });
+    $("#btn_note_d02").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-2','--','--');
+        play_note('d02');
+    });
+    $("#btn_note_d03").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-3','--','--');
+        play_note('d03');
+    });
+    $("#btn_note_d04").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-4','--','--');
+        play_note('d04');
+    });
+    $("#btn_note_d05").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-5','--','--');
+        play_note('d05');
+    });
+    $("#btn_note_d06").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','-6','--','--');
+        play_note('d06');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// String Buttons: a
+    $("#btn_note_a00").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','-0','--');
+        play_note('a00');
+    });
+    $("#btn_note_a01").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','-1','--');
+        play_note('a01');
+    });
+    $("#btn_note_a02").click(function(e) {
+        save_current_values();
+        note_count++;
+        write_tab('--','--','--','--','-2','--');
+        play_note('a02');
+    });
+    $("#btn_note_a03").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','-3','--');
+        play_note('a03');
+    });
+    $("#btn_note_a04").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','-4','--');
+        play_note('a04');
+    });
+    $("#btn_note_a05").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','-5','--');
+        play_note('a05');
+    });
+    $("#btn_note_a06").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','-6','--');
+        play_note('a06');
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    //// String Buttons: low E
+    $("#btn_note_E00").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-0');
+        play_note('E00');
+    });
+    $("#btn_note_E01").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-1');
+        play_note('E01');
+    });
+    $("#btn_note_E02").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-2');
+        play_note('E02');
+    });
+    $("#btn_note_E03").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-3');
+        play_note('E03');
+    });
+    $("#btn_note_E04").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-4');
+        play_note('E04');
+    });
+    $("#btn_note_E05").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-5');
+        play_note('E05');
+    });
+    $("#btn_note_E06").click(function(e) {
+        save_current_values();
+        write_tab('--','--','--','--','--','-6');
+        play_note('E06');
+    });
+</script>

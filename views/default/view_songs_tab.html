@@ -1,0 +1,226 @@
+{{extend 'layout.html'}}
+
+<!-- GTC VIEW_SONG_TAB PAGE -->
+<!------------------------------------------------------------------------------------------------------>
+<!-- Page Title -->
+{{background_tab_image = URL('static','images/GTC_View_Songs_Title_Background.jpg')}}
+<div class="tab_main_background" style="background-image: url('{{=background_tab_image}}')">
+<p style="margin-bottom:50px;"></p>
+<br>
+<div class=page_title>
+    {{for s in selected_song:}}
+        {{=s.song_title}}
+    {{pass}}
+<div class=page_subtitle>
+    <br>Created By:
+    {{for s in selected_song:}}
+        {{=s.first_name}} {{=s.last_name}}
+    {{pass}}
+    <br>Tabbed On:
+    {{for s in selected_song:}}
+        {{=s.date_created}}
+    {{pass}}
+</div>
+<hr>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Logged-In Buttons -->
+<p style="margin-bottom:10px;"></p>
+<div class=song_menu_buttons>
+    {{=A('New Song', _class='btn btn-info btn-lg', _href=URL('default', 'index'))}}
+    {{=A('Song Library', _class='btn btn-primary btn-lg', _href=URL('default', 'view_songs'))}}
+    <input class="btn btn-success btn-lg" id="btn_play_song" type="button" value='Play Song'>
+    {{for n in selected_song:}}
+        {{=A('Download', _class='btn btn-warning btn-lg', _href=URL('default', 'download', args=[s.id]))}}
+    {{pass}}
+    {{for s in selected_song:}}
+        {{if auth.user.first_name == s.first_name:}}
+            {{if auth.user.last_name == s.last_name:}}
+                {{=A('Delete', _class='btn btn-danger btn-lg', _href=URL('default', 'delete_song', args=[s.id]))}}
+            {{pass}}
+        {{pass}}
+    {{pass}}
+    <div class=logout_button>
+        {{=A('Logout', _class='btn btn-danger btn-xs', _href=URL('default', 'user', args=['logout']))}}
+    </div>
+</div></div></div>
+<p style="margin-bottom:50px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Display TAB -->
+<span class="tab_tools_title">TAB:</span>
+<br><br>
+<div class ="tab_notes">
+    {{for s in selected_song:}}
+        e|-<var id="song_notes_e2">{{=s.note_list_e}}</var> <br>
+    {{pass}}
+    {{for s in selected_song:}}
+        B|-<var id="song_notes_b2">{{=s.note_list_b}}</var> <br>
+    {{pass}}
+    {{for s in selected_song:}}
+        G|-<var id="song_notes_g2">{{=s.note_list_g}}</var> <br>
+    {{pass}}
+    {{for s in selected_song:}}
+        D|-<var id="song_notes_d2">{{=s.note_list_d}}</var> <br>
+    {{pass}}
+    {{for s in selected_song:}}
+        A|-<var id="song_notes_a2">{{=s.note_list_a}}</var> <br>
+    {{pass}}
+    {{for s in selected_song:}}
+        E|-<var id="song_notes_E2">{{=s.note_list_lowE}}</var> <br>
+    {{pass}}
+</div>
+<p style=margin-bottom:50px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- TAB Comments -->
+<hr style="height:2px; border:none; color:black; background-color:#333;" />
+<div class="comment_form">
+    {{=comment_form}}
+</div>
+<p style=margin-bottom:150px;"></p>
+<div class="comments_title">
+    Comments:
+</div>
+<div class="comments">
+    {{for s in selected_song:}}
+        {{=s.comments}}
+    {{pass}}
+</div>
+
+<p style=margin-bottom:250px;"></p>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Note Audio Sources -->
+<audio id="e00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e00.m4a"> </source> </audio>
+<audio id="e01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e01.m4a"> </source> </audio>
+<audio id="e02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e02.m4a"> </source> </audio>
+<audio id="e03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e03.m4a"> </source> </audio>
+<audio id="e04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e04.m4a"> </source> </audio>
+<audio id="e05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e05.m4a"> </source> </audio>
+<audio id="e06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_high_e/high_e06.m4a"> </source> </audio>
+
+<audio id="b00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b00.m4a"> </source> </audio>
+<audio id="b01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b01.m4a"> </source> </audio>
+<audio id="b02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b02.m4a"> </source> </audio>
+<audio id="b03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b03.m4a"> </source> </audio>
+<audio id="b04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b04.m4a"> </source> </audio>
+<audio id="b05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b05.m4a"> </source> </audio>
+<audio id="b06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_b/b06.m4a"> </source> </audio>
+
+<audio id="g00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g00.m4a"> </source> </audio>
+<audio id="g01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g01.m4a"> </source> </audio>
+<audio id="g02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g02.m4a"> </source> </audio>
+<audio id="g03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g03.m4a"> </source> </audio>
+<audio id="g04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g04.m4a"> </source> </audio>
+<audio id="g05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g05.m4a"> </source> </audio>
+<audio id="g06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_g/g06.m4a"> </source> </audio>
+
+<audio id="d00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d00.m4a"> </source> </audio>
+<audio id="d01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d01.m4a"> </source> </audio>
+<audio id="d02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d02.m4a"> </source> </audio>
+<audio id="d03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d03.m4a"> </source> </audio>
+<audio id="d04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d04.m4a"> </source> </audio>
+<audio id="d05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d05.m4a"> </source> </audio>
+<audio id="d06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_d/d06.m4a"> </source> </audio>
+
+<audio id="a00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a00.m4a"> </source> </audio>
+<audio id="a01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a01.m4a"> </source> </audio>
+<audio id="a02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a02.m4a"> </source> </audio>
+<audio id="a03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a03.m4a"> </source> </audio>
+<audio id="a04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a04.m4a"> </source> </audio>
+<audio id="a05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a05.m4a"> </source> </audio>
+<audio id="a06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_a/a06.m4a"> </source> </audio>
+
+<audio id="E00"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E00.m4a"> </source> </audio>
+<audio id="E01"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E01.m4a"> </source> </audio>
+<audio id="E02"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E02.m4a"> </source> </audio>
+<audio id="E03"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E03.m4a"> </source> </audio>
+<audio id="E04"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E04.m4a"> </source> </audio>
+<audio id="E05"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E05.m4a"> </source> </audio>
+<audio id="E06"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/notes_low_E/Low_E06.m4a"> </source> </audio>
+
+<audio id="CA"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_a.m4a"> </source> </audio>
+<audio id="CB"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_b.m4a"> </source> </audio>
+<audio id="CC"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_c.m4a"> </source> </audio>
+<audio id="CD"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_d.m4a"> </source> </audio>
+<audio id="CE"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_e.m4a"> </source> </audio>
+<audio id="CF"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_f.m4a"> </source> </audio>
+<audio id="CG"> <source src="http://people.ucsc.edu/~drothfel/GTC_audio/chords/chord_g.m4a"> </source> </audio>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Javascript -->
+<script>
+$("#btn_play_song").click(function(e) {
+    var eN = document.getElementById('song_notes_e2').innerHTML;
+    var bN = document.getElementById('song_notes_b2').innerHTML;
+    var gN = document.getElementById('song_notes_g2').innerHTML;
+    var dN = document.getElementById('song_notes_d2').innerHTML;
+    var aN = document.getElementById('song_notes_a2').innerHTML;
+    var EN = document.getElementById('song_notes_E2').innerHTML;
+    for (var i = 0, len = eN.length; i < len; i++) {
+        //Pause method credits go to: http://stackoverflow.com/questions/10058753/how-to-create-pause-or-delay-in-for-loop  [Guffa: April 7, 2012]
+        (function(i){
+            window.setTimeout(function(){
+                check_notes(eN[i], bN[i], gN[i], dN[i], aN[i], EN[i]);
+            }, i * 375);
+        }(i));
+    }
+});
+function play_note(note) {
+    note = document.getElementById(note);
+    note.play();
+}
+function check_notes(eN, bN, gN, dN, aN, EN) {
+    if      (eN == '0' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e00");
+    else if (eN == '1' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e01");
+    else if (eN == '2' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e02");
+    else if (eN == '3' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e03");
+    else if (eN == '4' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e04");
+    else if (eN == '5' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e05");
+    else if (eN == '6' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("e06");
+
+    else if (eN == '-' && bN == '0' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b00");
+    else if (eN == '-' && bN == '1' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b01");
+    else if (eN == '-' && bN == '2' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b02");
+    else if (eN == '-' && bN == '3' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b03");
+    else if (eN == '-' && bN == '4' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b04");
+    else if (eN == '-' && bN == '5' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b05");
+    else if (eN == '-' && bN == '6' && gN == '-' && dN == '-' && aN == '-' && EN == '-') play_note("b06");
+
+    else if (eN == '-' && bN == '-' && gN == '0' && dN == '-' && aN == '-' && EN == '-') play_note("g00");
+    else if (eN == '-' && bN == '-' && gN == '1' && dN == '-' && aN == '-' && EN == '-') play_note("g01");
+    else if (eN == '-' && bN == '-' && gN == '2' && dN == '-' && aN == '-' && EN == '-') play_note("g02");
+    else if (eN == '-' && bN == '-' && gN == '3' && dN == '-' && aN == '-' && EN == '-') play_note("g03");
+    else if (eN == '-' && bN == '-' && gN == '4' && dN == '-' && aN == '-' && EN == '-') play_note("g04");
+    else if (eN == '-' && bN == '-' && gN == '5' && dN == '-' && aN == '-' && EN == '-') play_note("g05");
+    else if (eN == '-' && bN == '-' && gN == '6' && dN == '-' && aN == '-' && EN == '-') play_note("g06");
+
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '0' && aN == '-' && EN == '-') play_note("d00");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '1' && aN == '-' && EN == '-') play_note("d01");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '2' && aN == '-' && EN == '-') play_note("d02");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '3' && aN == '-' && EN == '-') play_note("d03");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '4' && aN == '-' && EN == '-') play_note("d04");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '5' && aN == '-' && EN == '-') play_note("d05");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '6' && aN == '-' && EN == '-') play_note("d06");
+
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '0' && EN == '-') play_note("a00");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '1' && EN == '-') play_note("a01");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '2' && EN == '-') play_note("a02");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '3' && EN == '-') play_note("a03");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '4' && EN == '-') play_note("a04");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '5' && EN == '-') play_note("a05");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '6' && EN == '-') play_note("a06");
+
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '0') play_note("E00");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '1') play_note("E01");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '2') play_note("E02");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '3') play_note("E03");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '4') play_note("E04");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '5') play_note("E05");
+    else if (eN == '-' && bN == '-' && gN == '-' && dN == '-' && aN == '-' && EN == '6') play_note("E06");
+
+    else if (eN == '-' && bN == '2' && gN == '2' && dN == '2' && aN == '-' && EN == '-') play_note("CA");
+    else if (eN == '2' && bN == '4' && gN == '4' && dN == '4' && aN == '2' && EN == '-') play_note("CB");
+    else if (eN == '-' && bN == '1' && gN == '0' && dN == '2' && aN == '3' && EN == '-') play_note("CC");
+    else if (eN == '-' && bN == '2' && gN == '3' && dN == '2' && aN == '-' && EN == '-') play_note("CD");
+    else if (eN == '0' && bN == '0' && gN == '1' && dN == '2' && aN == '2' && EN == '-') play_note("CE");
+    else if (eN == '1' && bN == '1' && gN == '2' && dN == '3' && aN == '3' && EN == '-') play_note("CF");
+    else if (eN == '3' && bN == '3' && gN == '0' && dN == '0' && aN == '2' && EN == '3') play_note("CG");
+}
+</script>

@@ -1,0 +1,91 @@
+------------
+--  ABOUT --
+------------
+
+-----------------------
+General
+-----------------------
+Guitar TAB Creator [ GTC ]
+Version: 1.0
+CMPS 183 [ Final Project ] - Fall 2015
+Group Members: Dylan Rothfeld [ drothfel@ucsc.edu ]
+-----------------------
+Edited/Created Files:
+-----------------------
+• default.py
+• tables.py
+• index.html
+• view_songs.html
+• view_songs_tab.html
+• delete_song.html [ Intentionally left Blank ]
+• _main.scss
+• ABOUT
+-----------------------
+Abstract:
+-----------------------
+The project's main page will consist of an interactive guitar that plays notes/chords when you
+press on the strings (All sounds will be original and recorded by myself). While playing a song
+on the guitar, TAB music will automatically be written in real time on the page while you play
+a song (Many features will be available for configuring the tab). When the user is satisfied with
+their song, they can give it a name and save it to the TAB library. The TAB library consists
+of songs made from all users who access the application. Users can then click on any submitted
+song in the library (not just the ones you made) and view the TAB in a separate page.
+On each tabs page users can leave comments, have the computer play the TAB out loud, and download
+the TAB in a elegantly formatted .txt file.
+-----------------------
+Credits:
+-----------------------
+• default.py/download() function outline was posted on Google Groups by user 'thstart' on 12/22/11.
+    LINK: https://groups.google.com/forum/#!topic/web2py/GH2HVCGPMKo
+• view_songs_tab.html/$("#btn_play_song").click(function(e))/function(i) function outline was posted
+on stackoverflow by user 'Guffa' on 04/07/12.
+    LINK: http://stackoverflow.com/questions/10058753/how-to-create-pause-or-delay-in-for-loop
+• The song library background image in view_songs.html is the background image created by Google
+for their Android book library application.
+• All guitar sound effects are my own original recordings.
+-----------------------
+{ DEFAULT.PY }
+-----------------------
+• default.py/index(): Processes SQL FORM requests to create a new song by moving the stored note
+data in the buffer table to the newly created song's table.
+• default.py/view_songs(): Returns all songs in the database sorted by date created.
+• default.py/view_songs_tab(): Processes SQL FORM for entering a new comment and returns all data
+corresponding to the currently selected song.
+• default.py/note_list_insert(): Receives note data strings from the AJAX call and places it
+into the buffer table.
+• default.py/delete_song(): Removes a selected song from the database by selecting its id field.
+• default.py/download(): Stores all needed data corresponding to a song in buffers that are then
+formatted into an output file to be downloaded by the user.
+-----------------------
+{ TABLES.PY }
+-----------------------
+• db.define_table('songs'): Each instance of a song table stores all data for a single song in the
+database.
+• db.define_table('comments'): A buffer table that stores comment data as it is created to later
+be inserted into their corresponding song table.
+• db.define_table('placeholder'): A buffer table that stores all note data to later be inserted into
+their corresponding song table.
+-----------------------
+{ INDEX.HTML }
+-----------------------
+• The front page of the web application. Contains all the URL links to sound effects, and is where the
+user spends the majority of their time creating songs.
+-----------------------
+{ VIEW_SONGS.HTML }
+-----------------------
+• The song library. This view is where the user can browse songs created by all users of the web
+application and view/play/download a specific song by clicking on its song sheet.
+-----------------------
+{ VIEW_SONGS_TAB.HTML }
+-----------------------
+• This is the view for an individual selected song. Here is where the user can have the computer
+play the song out loud, download the song, enter a comment, or delete the song if the logged in
+user is the original creator.
+-----------------------
+{ DELETE_SONG.HTML }
+-----------------------
+• This page has been left intentionally blank as an experimental means of deleting songs.
+-----------------------
+{ _MAIN.SCSS }
+-----------------------
+• This is the styling page to properly format all displayed data in the .HTML files.

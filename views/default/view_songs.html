@@ -1,0 +1,37 @@
+{{extend 'layout.html'}}
+
+<!-- GTC VIEW_SONGS PAGE -->
+<!------------------------------------------------------------------------------------------------------>
+<!-- Page Title -->
+{{background_image = URL('static','images/GTC_View_Songs_Background.jpg')}}
+<body class="view_songs_background" style="background-image: url('{{=background_image}}')">
+<p style="margin-bottom:50px;"></p>
+<div class=page_title>
+    Song Library
+     <div class=welcome_message>
+         Welcome, {{=auth.user.first_name}} {{=auth.user.last_name}}
+         <p style="margin-bottom:5px;"></p>
+        {{=A('Logout', _class='btn btn-danger btn-xs', _href=URL('default', 'user', args=['logout']))}}
+     </div>
+    <p style="margin-bottom:12px;"></p>
+    <div class=song_menu_buttons>
+        {{=A('New Song', _class='btn btn-info btn-lg', _href=URL('default', 'index'))}}
+    </div>
+</div>
+<p style="margin-bottom:10px;"></p>
+<br><br>
+<!------------------------------------------------------------------------------------------------------>
+<!-- Song List Display -->
+{{background_page_image = URL('static','images/GTC_Song_Background.jpg')}}
+    {{for s in song_list:}}
+        <div class="view_songs">
+            {{song_tab_link = URL('default', 'view_songs_tab', args=[s.id])}}
+            <a href="{{=song_tab_link}}">
+                <div class="song_background" style="background-image: url('{{=background_page_image}}'); width: 130px; height:185px; border:1px solid black; margin: 10px; padding: 20px;" >
+                    <div class=song_title>{{=s.song_title}}</div>
+                </div>
+            </a>
+        </div>
+    {{pass}}
+<p style="margin-bottom:550px;"></p>
+</body>
